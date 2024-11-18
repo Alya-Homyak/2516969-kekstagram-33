@@ -1,3 +1,3 @@
 import { generatePosts } from './generate-photo-data.js';
-generatePosts();
-import './render-photo.js';
+import { renderPhoto } from './render-photo.js';
+renderPhoto(generatePosts());
