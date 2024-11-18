@@ -1,18 +1,17 @@
-const renderPhoto = (dataForPosts) => {
-  const pictureContainer = document.querySelector('.pictures');
-  const template = document.querySelector('#picture').content.querySelector('.picture');
+import {generatePosts} from './generate-photo-data';
 
-  const newFragment = document.createDocumentFragment();
+const pictureContainer = document.querySelector('.pictures');
+const template = document.querySelector('#picture').content.querySelector('.picture');
+const newPhotos = generatePosts();
 
-  dataForPosts.forEach(({ url, description, likes, comments }) => {
-    const newPhoto = template.cloneNode(true);
-    newPhoto.querySelector('.picture__img').src = url;
-    newPhoto.querySelector('.picture__img').alt = description;
-    newPhoto.querySelector('.picture__comments').textContent = comments.length;
-    newPhoto.querySelector('.picture__likes').textContent = likes;
-    newFragment.appendChild(newPhoto);
-  });
-  pictureContainer.appendChild(newFragment);
-};
+const newFragment = document.createDocumentFragment();
 
-export {renderPhoto};
+newPhotos.forEach(({url, description, likes, comments}) => {
+  const newPhoto = template.cloneNode(true);
+  newPhoto.querySelector('.picture__img').src = url;
+  newPhoto.querySelector('.picture__img').alt = description;
+  newPhoto.querySelector('.picture__comments').textContent = comments.length;
+  newPhoto.querySelector('.picture__likes').textContent = likes;
+  newFragment.appendChild(newPhoto);
+});
+pictureContainer.appendChild(newFragment);
